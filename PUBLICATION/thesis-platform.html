@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kioko Evans Mwendwa — Research Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f2ede3;
+    --surface: #faf7f1;
+    --white: #ffffff;
+    --navy: #1c2d4f;
+    --navy-dark: #111d35;
+    --navy-mid: #2a4070;
+    --gold: #9a7414;
+    --gold-bright: #b8890e;
+    --gold-pale: #f5e8c0;
+    --text: #191924;
+    --text-sub: #3a3f52;
+    --text-muted: #6b7280;
+    --border: #d8d0be;
+    --border-light: #ede6d8;
+    --teal: #0b6b63;
+    --teal-bg: #e4f4f2;
+    --blue: #1d4aa0;
+    --blue-bg: #eaf0fd;
+    --green: #166534;
+    --green-bg: #dcfce7;
+    --red: #991b1b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ─── Header ─────────────────────────────────────────────────────────── */
+  header {
+    background: var(--navy-dark);
+    border-bottom: 3px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 15px; font-weight: 800;
+    color: var(--navy-dark);
+    flex-shrink: 0;
+  }
+  .logo-name {
+    color: var(--gold-pale);
+    font-family: 'EB Garamond', serif;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .logo-sub {
+    color: #a0a8b8;
+    font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  nav { display: flex; gap: 4px; }
+  .nav-btn {
+    background: transparent;
+    color: #c8d0df;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  .nav-btn.active {
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-weight: 700;
+  }
+
+  /* ─── Pages ──────────────────────────────────────────────────────────── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── Hero ───────────────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
+    padding: 64px 24px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(154,116,20,0.06);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(11,107,99,0.06);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    color: #f5f0e4;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero-meta {
+    color: #8a98b5;
+    font-size: 14px;
+    margin-bottom: 24px;
+    font-family: 'EB Garamond', serif;
+  }
+  .hero-abstract {
+    color: #b8c0d0;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 0.01em;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-bright); }
+  .btn-secondary {
+    background: transparent;
+    color: #c8d8f0;
+    border: 1px solid #4a5880;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover { border-color: #7a90b8; color: #fff; }
+
+  /* ─── Stats strip ─────────────────────────────────────────────────────── */
+  .stats-strip {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    flex: 1 1 180px;
+    padding: 24px 20px;
+    border-right: 1px solid var(--border-light);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-value {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .stat-sub { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── Home Body Grid ──────────────────────────────────────────────────── */
+  .home-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .card-full { grid-column: 1 / -1; }
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .card p { font-size: 14px; color: var(--text-sub); line-height: 1.75; margin-bottom: 14px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ─── Bar Chart ──────────────────────────────────────────────────────── */
+  .bar-chart { margin: 8px 0 16px; }
+  .bar-chart-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-family: 'EB Garamond', serif;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    gap: 10px;
+  }
+  .bar-row-label {
+    width: 70px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+  }
+  .bar-track {
+    flex: 1;
+    background: var(--border-light);
+    border-radius: 3px;
+    height: 20px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    transition: width 0.8s cubic-bezier(.25,.8,.25,1);
+  }
+  .bar-val {
+    font-size: 10px;
+    color: white;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+  }
+  .bar-note { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+
+  /* ─── Tags ───────────────────────────────────────────────────────────── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+  }
+  .tag-civil-engineering   { background: #dbeafe; color: #1e40af; }
+  .tag-asphalt             { background: #fef3c7; color: #92400e; }
+  .tag-sustainability      { background: #dcfce7; color: #166534; }
+  .tag-pavement-engineering{ background: #e0e7ff; color: #3730a3; }
+  .tag-sisal-fibre         { background: #fce7f3; color: #9d174d; }
+  .tag-crumb-rubber        { background: #f3e8ff; color: #6b21a8; }
+  .tag-marshall-stability  { background: #ffedd5; color: #9a3412; }
+
+  /* ─── Section Badge ──────────────────────────────────────────────────── */
+  .section-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  /* ─── Materials list ──────────────────────────────────────────────────── */
+  .material-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .material-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .material-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .material-val { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── CTA banner ─────────────────────────────────────────────────────── */
+  .cta-banner {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 8px;
+    padding: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .cta-title { color: #f0e8cc; font-size: 18px; font-family: 'EB Garamond', serif; font-weight: 700; margin-bottom: 6px; }
+  .cta-sub { color: #8a98b5; font-size: 13px; }
+
+  /* ─── Article Page ───────────────────────────────────────────────────── */
+  .article-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .sidebar { position: sticky; top: 80px; }
+  .sidebar-nav {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .sidebar-nav-header {
+    background: var(--navy);
+    padding: 12px 14px;
+  }
+  .sidebar-nav-header span {
+    color: var(--gold-pale);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .sidebar-nav-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: var(--text-sub);
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    border-left: 3px solid transparent;
+    padding: 11px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    transition: all 0.15s;
+  }
+  .sidebar-nav-btn:hover { background: #faf7f0; color: var(--navy); }
+  .sidebar-nav-btn.active {
+    background: var(--gold-pale);
+    color: var(--gold);
+    border-left-color: var(--gold);
+    font-weight: 600;
+  }
+  .sidebar-meta {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .sidebar-meta-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .meta-row { margin-bottom: 8px; }
+  .meta-key {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1px;
+  }
+  .meta-val {
+    font-size: 12px;
+    color: var(--text-sub);
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* Article main */
+  .article-header {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .article-header h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 16px;
+  }
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 14px;
+    flex-wrap: wrap;
+  }
+  .author-avatar {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .author-initials { color: var(--gold-pale); font-size: 13px; font-weight: 700; font-family: 'EB Garamond', serif; }
+  .author-name { font-size: 14px; font-weight: 600; color: var(--text); font-family: 'EB Garamond', serif; }
+  .author-inst { font-size: 11px; color: var(--text-muted); }
+
+  .article-body {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+  }
+
+  /* Article sections (shown/hidden) */
+  .article-section { display: none; }
+  .article-section.active { display: block; }
+
+  /* ─── Abstract box ──────────────────────────────────────────────────── */
+  .abstract-box {
+    background: var(--gold-pale);
+    border: 1px solid rgba(154,116,20,0.25);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .abstract-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .abstract-text {
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ─── Highlight cards ──────────────────────────────────────────────── */
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .highlight-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+  }
+  .highlight-value {
+    font-family: 'EB Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .highlight-label { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .highlight-sub { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── Body text ─────────────────────────────────────────────────────── */
+  .body-text {
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    margin-bottom: 18px;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ─── Section headings ─────────────────────────────────────────────── */
+  .section-h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .section-h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    margin-top: 24px;
+    font-weight: 700;
+  }
+
+  /* ─── Callout ─────────────────────────────────────────────────────────── */
+  .callout {
+    border-left: 3px solid;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 20px 0;
+  }
+  .callout-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .callout-text { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+  .callout-insight { background: #eff6ff; border-color: var(--blue); }
+  .callout-insight .callout-title { color: var(--blue); }
+  .callout-finding { background: var(--gold-pale); border-color: var(--gold); }
+  .callout-finding .callout-title { color: var(--gold); }
+  .callout-gap { background: #fdf4f4; border-color: var(--red); }
+  .callout-gap .callout-title { color: var(--red); }
+
+  /* ─── Data Table ─────────────────────────────────────────────────────── */
+  .table-wrap { margin: 24px 0; overflow-x: auto; }
+  .table-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-sub);
+    margin-bottom: 8px;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 0.02em;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: #f0e8cc;
+    font-weight: 600;
+    padding: 9px 12px;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .data-table th:first-child { text-align: left; }
+  .data-table th:not(:first-child) { text-align: center; }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-sub);
+  }
+  .data-table td:first-child { text-align: left; }
+  .data-table td:not(:first-child) { text-align: center; }
+  .data-table tr.row-even { background: var(--white); }
+  .data-table tr.row-odd { background: #faf7f2; }
+  .data-table tr.row-last { background: #f8f5f0; }
+  .data-table tr.row-highlighted { background: var(--gold-pale); }
+  .data-table tr.row-highlighted td { color: var(--navy-dark); font-weight: 600; }
+
+  /* ─── Conclusions grid ───────────────────────────────────────────────── */
+  .conclusions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .conclusion-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .conclusion-icon { font-size: 16px; margin-bottom: 6px; }
+  .conclusion-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .conclusion-text { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── References ─────────────────────────────────────────────────────── */
+  .refs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cite-toggle {
+    display: flex;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px;
+  }
+  .cite-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.15s;
+    font-family: 'DM Mono', monospace;
+  }
+  .cite-btn.active { background: var(--navy); color: var(--gold-pale); }
+  .refs-list {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .ref-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .ref-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .ref-num { font-size: 12px; color: var(--text-muted); min-width: 20px; padding-top: 2px; font-family: 'DM Mono', monospace; }
+  .ref-text { font-size: 13px; color: var(--text-sub); line-height: 1.65; font-family: 'EB Garamond', serif; }
+
+  /* ─── CV Page ────────────────────────────────────────────────────────── */
+  .cv-layout { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+  .cv-header {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .cv-avatar {
+    width: 90px; height: 90px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cv-avatar-text { color: var(--gold-pale); font-size: 28px; font-weight: 700; font-family: 'EB Garamond', serif; }
+  .cv-info { flex: 1; min-width: 220px; }
+  .cv-name { font-family: 'EB Garamond', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .cv-title { color: var(--gold); font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .cv-inst { color: var(--text-muted); font-size: 13px; margin-bottom: 12px; }
+  .cv-bio { color: var(--text-sub); font-size: 14px; line-height: 1.65; max-width: 560px; margin-bottom: 16px; font-family: 'EB Garamond', serif; }
+  .cv-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cv-link { font-size: 12px; color: var(--blue); display: flex; align-items: center; gap: 4px; }
+  .cv-stats { display: flex; flex-direction: column; gap: 10px; min-width: 130px; }
+  .cv-stat {
+    text-align: center;
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+  .cv-stat-val { font-family: 'EB Garamond', serif; font-size: 20px; font-weight: 700; color: var(--navy); }
+  .cv-stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cv-grid-full { grid-column: 1 / -1; }
+
+  .cv-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .edu-row { display: flex; gap: 16px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
+  .edu-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .edu-icon {
+    width: 48px; height: 48px;
+    background: var(--navy-dark);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .edu-degree { font-size: 14px; font-weight: 600; color: var(--navy); font-family: 'EB Garamond', serif; margin-bottom: 2px; }
+  .edu-inst { font-size: 13px; color: var(--text-sub); margin-bottom: 2px; }
+  .edu-meta { display: flex; gap: 8px; }
+  .edu-year { font-size: 11px; color: var(--text-muted); }
+  .edu-gpa { font-size: 11px; color: var(--green); font-weight: 600; }
+
+  .skill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .skill-item { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .skill-item span { font-size: 13px; color: var(--text-sub); }
+
+  .pub-card {
+    background: var(--gold-pale);
+    border: 1px solid rgba(154,116,20,0.25);
+    border-radius: 6px;
+    padding: 18px;
+  }
+  .pub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .pub-title { font-size: 15px; font-weight: 600; color: var(--navy); font-family: 'EB Garamond', serif; margin-bottom: 6px; line-height: 1.4; }
+  .pub-journal { font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
+  .pub-doi { font-size: 12px; color: var(--text-muted); }
+  .pub-status {
+    background: #dcfce7;
+    color: #166534;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .interest-tag {
+    background: var(--blue-bg);
+    color: var(--blue);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'EB Garamond', serif;
+    display: inline-block;
+    margin: 4px;
+  }
+
+  /* ─── Footer ─────────────────────────────────────────────────────────── */
+  footer {
+    background: var(--navy-dark);
+    border-top: 2px solid rgba(154,116,20,0.25);
+    padding: 24px;
+    text-align: center;
+  }
+  .footer-text {
+    color: #5a6880;
+    font-size: 12px;
+    font-family: 'EB Garamond', serif;
+  }
+  .footer-dot { color: rgba(154,116,20,0.5); margin: 0 8px; }
+
+  /* ─── Objectives list ────────────────────────────────────────────────── */
+  ol.objectives {
+    padding-left: 22px;
+  }
+  ol.objectives li {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.7;
+    margin-bottom: 10px;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ─── Responsive ─────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .article-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .home-body { grid-template-columns: 1fr; }
+    .highlights-grid { grid-template-columns: 1fr; }
+    .conclusions-grid { grid-template-columns: 1fr; }
+    .cv-grid { grid-template-columns: 1fr; }
+    nav { gap: 2px; }
+    .nav-btn { padding: 7px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-icon">K</div>
+      <div>
+        <div class="logo-name">Kioko Evans Mwendwa</div>
+        <div class="logo-sub">Civil &amp; Construction Engineering · TUK</div>
+      </div>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="showPage('home')">Home</button>
+      <button class="nav-btn" onclick="showPage('article')">Research Article</button>
+      <button class="nav-btn" onclick="showPage('cv')">Author &amp; CV</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- HOME PAGE                                                              -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <span class="section-badge" style="background:rgba(154,116,20,0.12);color:var(--gold);border:1px solid rgba(154,116,20,0.25);">Peer Reviewed</span>
+        <span class="section-badge" style="background:rgba(11,107,99,0.12);color:#3cc4b8;border:1px solid rgba(11,107,99,0.25);">2024 Publication</span>
+        <span class="section-badge" style="background:rgba(91,127,207,0.12);color:#7fa0e0;border:1px solid rgba(91,127,207,0.25);">Open Access</span>
+      </div>
+      <h1>Performance Assessment of Asphalt Concrete Modified with a Mixture of Sisal Fibre and Crumb Rubber for Road Pavement Construction</h1>
+      <p class="hero-meta">Kioko Evans Mwendwa · Journal of Civil &amp; Construction Engineering · Vol. 12, No. 1 · 2024</p>
+      <p class="hero-abstract">Road infrastructure is a fundamental enabler of socio-economic development in Kenya. This study assesses the performance of asphalt concrete modified with combined sisal fibre and crumb rubber at dosage levels of 0%, 1%, 2%, and 3% by weight of bitumen using the Marshall Method (ASTM D6927)…</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('article')">Read Full Article →</button>
+        <button class="btn-secondary" onclick="showPage('cv')">Author Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-value" style="color:var(--teal);">+26.1%</div>
+        <div class="stat-label">Marshall Stability gain</div>
+        <div class="stat-sub">at 3% modifier content</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color:var(--blue);">+28%</div>
+        <div class="stat-label">Tensile Strength peak</div>
+        <div class="stat-sub">at 2% modifier content</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color:var(--gold);">97%</div>
+        <div class="stat-label">Bitumen retention</div>
+        <div class="stat-sub">at 3% modifier content</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="home-body">
+    <!-- Research Summary -->
+    <div class="card card-full">
+      <div class="card-label" style="color:var(--teal);">Research Summary</div>
+      <h2>Sustainable Asphalt Modification in Kenya</h2>
+      <p>This study addresses a critical gap in East African pavement engineering: the performance of asphalt concrete modified with locally-sourced sisal fibre and waste tyre crumb rubber. Using Marshall Method testing at four dosage levels, the research provides empirical data on stability, tensile strength, flow, and binder–aggregate adhesion.</p>
+      <p>Key outcomes confirm that the 2%–3% combined modifier range delivers optimal performance across all tested parameters with all modified mixes exceeding the 8.0 kN minimum Marshall Stability specification, and 3% modification achieving 97% bitumen retention versus 81% in the control.</p>
+    </div>
+
+    <!-- Marshall Stability Chart -->
+    <div class="card">
+      <div class="card-label" style="color:var(--teal);">Marshall Stability</div>
+      <div class="bar-chart">
+        <div class="bar-chart-label">Stability (kN) by modifier content</div>
+        <div class="bar-row">
+          <div class="bar-row-label">0% (ctrl)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:71.4%;background:var(--teal);"><span class="bar-val">8.57</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">1%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:78.6%;background:var(--teal);"><span class="bar-val">9.43</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">2%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:85.2%;background:var(--teal);"><span class="bar-val">10.22</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">3%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:90.1%;background:var(--teal);"><span class="bar-val">10.81</span></div></div>
+        </div>
+      </div>
+      <div class="bar-note">Progressive 26.1% gain from control to 3% modifier</div>
+    </div>
+
+    <!-- ITS Chart -->
+    <div class="card">
+      <div class="card-label" style="color:var(--blue);">Indirect Tensile Strength</div>
+      <div class="bar-chart">
+        <div class="bar-chart-label">ITS (kPa) by modifier content</div>
+        <div class="bar-row">
+          <div class="bar-row-label">0% (ctrl)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:68.3%;background:var(--blue);"><span class="bar-val">820</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">1%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:78.3%;background:var(--blue);"><span class="bar-val">940</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">2% ★</div>
+          <div class="bar-track"><div class="bar-fill" style="width:87.5%;background:var(--blue);"><span class="bar-val">1050</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">3%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:84.2%;background:var(--blue);"><span class="bar-val">1010</span></div></div>
+        </div>
+      </div>
+      <div class="bar-note">Peak 28% improvement at 2%; slight decline at 3% due to agglomeration</div>
+    </div>
+
+    <!-- Keywords -->
+    <div class="card">
+      <div class="card-label" style="color:var(--text-muted);">Research Tags</div>
+      <span class="tag tag-civil-engineering">civil engineering</span>
+      <span class="tag tag-asphalt">asphalt</span>
+      <span class="tag tag-sustainability">sustainability</span>
+      <span class="tag tag-pavement-engineering">pavement engineering</span>
+      <span class="tag tag-sisal-fibre">sisal fibre</span>
+      <span class="tag tag-crumb-rubber">crumb rubber</span>
+      <span class="tag tag-marshall-stability">Marshall stability</span>
+    </div>
+
+    <!-- Materials Sourcing -->
+    <div class="card">
+      <div class="card-label" style="color:var(--text-muted);">Materials Sourcing</div>
+      <div class="material-row"><div class="material-icon"></div><div><div class="material-name">Aggregates</div><div class="material-val">Mlolongo Quarry, Nairobi</div></div></div>
+      <div class="material-row"><div class="material-icon"></div><div><div class="material-name">Bitumen 80/100</div><div class="material-val">Kenya Petroleum Refineries</div></div></div>
+      <div class="material-row"><div class="material-icon"></div><div><div class="material-name">Sisal Fibre</div><div class="material-val">Kitui County (10–15 mm)</div></div></div>
+      <div class="material-row"><div class="material-icon"></div><div><div class="material-name">Crumb Rubber</div><div class="material-val">Dandora Dumpsite (&lt; 1.18 mm)</div></div></div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div>
+        <div class="cta-title">Read the Complete Research Article</div>
+        <div class="cta-sub">Full methodology, all 5 data tables, results, and 17 references with APA/IEEE citation toggle</div>
+      </div>
+      <button class="btn-primary" onclick="showPage('article')">Open Article →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ARTICLE PAGE                                                           -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div id="page-article" class="page">
+  <div class="article-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-header"><span>Article Sections</span></div>
+        <button class="sidebar-nav-btn active" onclick="showSection('abstract')">Abstract</button>
+        <button class="sidebar-nav-btn" onclick="showSection('introduction')">1. Introduction</button>
+        <button class="sidebar-nav-btn" onclick="showSection('methodology')">2. Methodology</button>
+        <button class="sidebar-nav-btn" onclick="showSection('results')">3. Results</button>
+        <button class="sidebar-nav-btn" onclick="showSection('conclusions')">4. Conclusions</button>
+        <button class="sidebar-nav-btn" onclick="showSection('references')">References</button>
+      </div>
+      <div class="sidebar-meta">
+        <div class="sidebar-meta-title">Article Info</div>
+        <div class="meta-row"><div class="meta-key">Author</div><div class="meta-val">Kioko Evans Mwendwa</div></div>
+        <div class="meta-row"><div class="meta-key">Year</div><div class="meta-val">2024</div></div>
+        <div class="meta-row"><div class="meta-key">Journal</div><div class="meta-val">Journal of Civil &amp; Construction Engineering</div></div>
+        <div class="meta-row"><div class="meta-key">DOI</div><div class="meta-val">10.xxxx/jce.2024.001</div></div>
+        <div style="margin-top:12px;">
+          <span class="tag tag-civil-engineering">civil engineering</span>
+          <span class="tag tag-asphalt">asphalt</span>
+          <span class="tag tag-sustainability">sustainability</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main>
+      <!-- Article Header -->
+      <div class="article-header">
+        <div style="margin-bottom:14px;flex-wrap:wrap;display:flex;gap:8px;">
+          <span class="section-badge" style="background:rgba(11,107,99,0.08);color:var(--teal);border:1px solid rgba(11,107,99,0.2);">Research Article</span>
+          <span class="section-badge" style="background:rgba(29,74,160,0.08);color:var(--blue);border:1px solid rgba(29,74,160,0.2);">Civil Engineering</span>
+        </div>
+        <h1>Performance Assessment of Asphalt Concrete Modified with a Mixture of Sisal Fibre and Crumb Rubber for Road Pavement Construction</h1>
+        <div class="author-row">
+          <div class="author-avatar"><span class="author-initials">KEM</span></div>
+          <div>
+            <div class="author-name">Kioko Evans Mwendwa</div>
+            <div class="author-inst">Technical University of Kenya · Department of Civil &amp; Construction Engineering</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Body (sections) -->
+      <div class="article-body">
+
+        <!-- ABSTRACT -->
+        <div id="sec-abstract" class="article-section active">
+          <div class="abstract-box">
+            <div class="abstract-label">Abstract</div>
+            <p class="abstract-text">Road infrastructure is a fundamental enabler of socio-economic development in Kenya. This study assesses the performance of asphalt concrete modified with combined sisal fibre and crumb rubber at dosage levels of 0%, 1%, 2%, and 3% by weight of bitumen using the Marshall Method (ASTM D6927). Results demonstrate a 26.1% improvement in Marshall Stability at 3% modification (8.57 kN → 10.81 kN), a 28% peak improvement in Indirect Tensile Strength at 2% (820 → 1,050 kPa), and bitumen retention reaching 97% at 3% dosage. The optimum modifier content is identified as 2%–3%, offering a compelling case for adoption of these locally-sourced, waste-derived materials in sustainable road construction across Kenya.</p>
+          </div>
+          <div style="margin-bottom:24px;">
+            <p style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">Keywords</p>
+            <span class="tag tag-civil-engineering">civil engineering</span>
+            <span class="tag tag-asphalt">asphalt</span>
+            <span class="tag tag-sustainability">sustainability</span>
+            <span class="tag tag-pavement-engineering">pavement engineering</span>
+            <span class="tag tag-sisal-fibre">sisal fibre</span>
+            <span class="tag tag-crumb-rubber">crumb rubber</span>
+            <span class="tag tag-marshall-stability">Marshall stability</span>
+          </div>
+          <div class="highlights-grid">
+            <div class="highlight-card">
+              <div class="highlight-value" style="color:var(--teal);">+26.1%</div>
+              <div class="highlight-label">Marshall Stability gain</div>
+              <div class="highlight-sub">at 3% modifier content</div>
+            </div>
+            <div class="highlight-card">
+              <div class="highlight-value" style="color:var(--blue);">+28%</div>
+              <div class="highlight-label">Tensile Strength peak</div>
+              <div class="highlight-sub">at 2% modifier content</div>
+            </div>
+            <div class="highlight-card">
+              <div class="highlight-value" style="color:var(--gold);">97%</div>
+              <div class="highlight-label">Bitumen retention</div>
+              <div class="highlight-sub">at 3% modifier content</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTRODUCTION -->
+        <div id="sec-introduction" class="article-section">
+          <h2 class="section-h2">1. Introduction</h2>
+          <p class="body-text">Road infrastructure is a fundamental enabler of socio-economic development, enhancing connectivity, trade, and access to essential services. Kenya's road network has expanded from approximately 41,800 km in 1963 to over 63,575 km by 2019 (KeNHA, 2019). Despite this growth, an estimated 30% of the total network requires major rehabilitation or complete reconstruction — largely attributed to structural failures arising from poor material performance, inadequate design specifications, and climatic stressors.</p>
+          <p class="body-text">Conventional asphalt concrete often lacks sufficient tensile strength and structural stability to endure harsh service conditions, leading to frequent distress modes including rutting, cracking, stripping, and potholing. Simultaneously, Kenya faces a mounting environmental challenge from the improper disposal of waste vehicle tyres, which accumulate in landfills or are openly burned, posing serious threats to public health and ecological systems (Huaxin et al., 2009).</p>
+          <p class="body-text">Sisal fibre (Agave sisalana) abundantly cultivated in Kitui, Taita-Taveta, and Kilifi counties  possesses tensile strength of 300–700 MPa, thermal stability, and rough surface texture that promotes mechanical interlocking within composite matrices (Ramakrishna &amp; Sundararajan, 2005). Crumb rubber (CR) from waste tyres improves viscoelastic behaviour of asphalt binders, enhancing elasticity, fatigue resistance, and high-temperature performance (Mashaan et al., 2014). While prior studies have examined each modifier individually, their synergistic application under Kenyan climatic and traffic conditions has received no attention. This study fills that gap using entirely locally-sourced materials.</p>
+          <div class="callout callout-gap">
+            <div class="callout-title">◉ Research Gap</div>
+            <p class="callout-text">While prior studies have examined sisal fibre and crumb rubber individually as asphalt modifiers, the synergistic application of both materials in a single mix — particularly under Kenyan climatic and traffic conditions — has received no attention. This study fills that gap with empirical evidence using entirely locally-sourced materials.</p>
+          </div>
+          <h3 class="section-h3">Research Objectives</h3>
+          <ol class="objectives">
+            <li>Determine the Indirect Tensile Strength (ITS) at 0%, 1%, 2%, and 3% combined sisal fibre and crumb rubber by weight of bitumen.</li>
+            <li>Determine Marshall Stability and Flow at the same dosage levels.</li>
+            <li>Assess binder–aggregate adhesion through bitumen affinity (stripping) tests across all four modifier contents.</li>
+          </ol>
+        </div>
+
+        <!-- METHODOLOGY -->
+        <div id="sec-methodology" class="article-section">
+          <h2 class="section-h2">2. Methodology</h2>
+          <h3 class="section-h3">2.1 Materials</h3>
+          <p class="body-text">All materials were sourced locally to ensure applicability to Kenyan road construction. Aggregates were obtained from Mlolongo Quarry in the Nairobi Metropolitan area (crushed basalt/granite). Bitumen used was 80/100 penetration grade from Kenya Petroleum Refineries Ltd. Sisal Fibre was sourced from Kitui County and trimmed to 10–15 mm uniform length. Crumb Rubber was obtained from waste tyres at Dandora Dumpsite and ground to pass a 1.18 mm sieve.</p>
+          <!-- Table 1 -->
+          <div class="table-wrap">
+            <div class="table-title">Table 1 · Bitumen and Sisal Fibre Properties</div>
+            <table class="data-table">
+              <thead><tr><th>Property</th><th>Test Standard</th><th>Result</th><th>Specification</th></tr></thead>
+              <tbody>
+                <tr class="row-even"><td>Bitumen Penetration @ 25°C (0.1 mm)</td><td>ASTM D5</td><td>84</td><td>80–100</td></tr>
+                <tr class="row-odd"><td>Bitumen Specific Gravity @ 27°C</td><td>ASTM D70</td><td>1.02</td><td>&gt; 1.00</td></tr>
+                <tr class="row-even"><td>Sisal Tensile Strength (MPa)</td><td>Experimental</td><td>420–650</td><td>—</td></tr>
+                <tr class="row-odd"><td>Sisal Density (g/cm³)</td><td>Experimental</td><td>1.33</td><td>—</td></tr>
+                <tr class="row-even"><td>Sisal Water Absorption (%)</td><td>Experimental</td><td>11–17</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="section-h3">2.2 Mix Design</h3>
+          <p class="body-text">The Marshall Method (ASTM D6927) was followed for Asphalt Concrete Type I (AC-I) targeting: Stability ≥ 8 kN, Flow 2–4 mm, Air Voids 3–5%, VMA ≥ 14%, and VFB 65–75%. Trial mixes at bitumen contents of 4.5%–6.5% established the Optimum Bitumen Binder Content (OBBC) at 5.5%. Modified mixes incorporated equal proportions of sisal fibre and crumb rubber as dry additives at 1%, 2%, and 3% by weight of bitumen; mixing temperature was maintained at 150–160°C with 75 blows per side compaction. Two replicate specimens were prepared per mix category.</p>
+          <!-- Table 2 -->
+          <div class="table-wrap">
+            <div class="table-title">Table 2 · OBBC Determination — Marshall Method Summary</div>
+            <table class="data-table">
+              <thead><tr><th>Bitumen (%)</th><th>Stability (kN)</th><th>Flow (mm)</th><th>Air Voids (%)</th><th>VMA (%)</th><th>VFB (%)</th></tr></thead>
+              <tbody>
+                <tr class="row-even"><td>4.5</td><td>7.40</td><td>2.1</td><td>6.2</td><td>15.8</td><td>60.8</td></tr>
+                <tr class="row-odd"><td>5.0</td><td>8.10</td><td>2.6</td><td>4.8</td><td>15.2</td><td>68.4</td></tr>
+                <tr class="row-highlighted"><td>5.5 ✓ OBBC</td><td>8.57</td><td>3.1</td><td>4.1</td><td>14.9</td><td>72.5</td></tr>
+                <tr class="row-odd"><td>6.0</td><td>8.20</td><td>3.8</td><td>3.4</td><td>14.7</td><td>76.9</td></tr>
+                <tr class="row-last"><td>6.5</td><td>7.60</td><td>4.5</td><td>2.6</td><td>14.5</td><td>82.1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div id="sec-results" class="article-section">
+          <h2 class="section-h2">3. Results</h2>
+          <h3 class="section-h3">3.1 Marshall Stability and Flow</h3>
+          <p class="body-text">Marshall Stability increased progressively from 8.57 kN (control) to 10.81 kN at 3% modification — a 26.1% improvement. The improved interlocking between binder and sisal fibres and elastic recovery from crumb rubber explain this trend. Bulk density decreased slightly from 2.21 to 2.15 g/cm³, reflecting modestly increased internal voids. Flow values rose from 9.0 to 11.0 mm, indicating enhanced ductility and energy absorption — desirable for fatigue cracking resistance.</p>
+          <!-- Table 3 -->
+          <div class="table-wrap">
+            <div class="table-title">Table 3 · Marshall Stability and Flow Results</div>
+            <table class="data-table">
+              <thead><tr><th>Mix Type</th><th>Modifier (%)</th><th>Density (g/cm³)</th><th>Stability (kN)</th><th>Flow (mm)</th></tr></thead>
+              <tbody>
+                <tr class="row-even"><td>Control</td><td>0%</td><td>2.21</td><td>8.57</td><td>9.0</td></tr>
+                <tr class="row-odd"><td>Modified 1</td><td>1%</td><td>2.19</td><td>9.43</td><td>9.6</td></tr>
+                <tr class="row-even"><td>Modified 2</td><td>2%</td><td>2.17</td><td>10.22</td><td>10.3</td></tr>
+                <tr class="row-odd"><td>Modified 3</td><td>3%</td><td>2.15</td><td>10.81</td><td>11.0</td></tr>
+                <tr class="row-last"><td>Min. Spec.</td><td>—</td><td>—</td><td>≥ 8.0 kN</td><td>2–4 mm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout-insight">
+            <div class="callout-title"> Key Insight</div>
+            <p class="callout-text">All modified mixes exceeded the 8.0 kN minimum specification. The increased flow values reflect rubber-enhanced plasticity — a known characteristic of CR-modified asphalt that warrants re-evaluation of conventional flow specifications for rubber-modified mixtures.</p>
+          </div>
+          <h3 class="section-h3">3.2 Indirect Tensile Strength (ITS)</h3>
+          <p class="body-text">ITS followed a non-monotonic trend: rising from 820 kPa (control) to a peak of 1,050 kPa at 2% before a marginal decline to 1,010 kPa at 3%. The 28% improvement at 2% reflects synergistic crack-bridging of sisal fibres combined with elastic energy absorption of crumb rubber. The slight decrease at 3% is attributed to fibre agglomeration and reduced homogeneity at higher dosages — a phenomenon also observed by Gungor &amp; Topcu (2020).</p>
+          <!-- Table 4 -->
+          <div class="table-wrap">
+            <div class="table-title">Table 4 · Indirect Tensile Strength Results</div>
+            <table class="data-table">
+              <thead><tr><th>Mix Type</th><th>Modifier (%)</th><th>Avg. ITS (kPa)</th><th>vs. Control</th></tr></thead>
+              <tbody>
+                <tr class="row-even"><td>Control</td><td>0%</td><td>820</td><td>—</td></tr>
+                <tr class="row-odd"><td>Modified 1</td><td>1%</td><td>940</td><td>+14.6%</td></tr>
+                <tr class="row-highlighted"><td>Modified 2</td><td>2%</td><td>1,050</td><td>★ +28.0% (Peak)</td></tr>
+                <tr class="row-odd"><td>Modified 3</td><td>3%</td><td>1,010</td><td>+23.2%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout-finding">
+            <div class="callout-title">★ Key Finding</div>
+            <p class="callout-text">The 2% modifier content represents the inflection point for tensile strength, achieving a 28% improvement over the control. Beyond this threshold, diminishing returns due to fibre agglomeration begin to offset reinforcement benefits. Practical recommendations should target the 2%–3% window.</p>
+          </div>
+          <h3 class="section-h3">3.3 Bitumen Affinity (Stripping) Test</h3>
+          <p class="body-text">Retained coating percentage increased consistently with modifier content, confirming improved binder–aggregate adhesion and enhanced resistance to moisture-induced damage. The 3% mix exhibited the best performance at 97% retained coating — a strong indicator of moisture-damage resistance consistent with findings by Little &amp; Bhasin (2006).</p>
+          <!-- Table 5 -->
+          <div class="table-wrap">
+            <div class="table-title">Table 5 · Bitumen Affinity (Stripping) Test Results</div>
+            <table class="data-table">
+              <thead><tr><th>Mix Type</th><th>Modifier (%)</th><th>Retained Coating (%)</th><th>Assessment</th></tr></thead>
+              <tbody>
+                <tr class="row-even"><td>Control</td><td>0%</td><td>81%</td><td>Acceptable</td></tr>
+                <tr class="row-odd"><td>Modified 1</td><td>1%</td><td>88%</td><td>Good</td></tr>
+                <tr class="row-even"><td>Modified 2</td><td>2%</td><td>93%</td><td>Good</td></tr>
+                <tr class="row-odd"><td>Modified 3</td><td>3%</td><td>97%</td><td>Excellent</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Stripping bar chart -->
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:6px;padding:20px;margin-top:16px;">
+            <div class="bar-chart">
+              <div class="bar-chart-label">Retained bitumen coating (%) — stripping resistance</div>
+              <div class="bar-row"><div class="bar-row-label">0% ctrl</div><div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--gold);"><span class="bar-val">81</span></div></div></div>
+              <div class="bar-row"><div class="bar-row-label">1%</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--gold);"><span class="bar-val">88</span></div></div></div>
+              <div class="bar-row"><div class="bar-row-label">2%</div><div class="bar-track"><div class="bar-fill" style="width:93%;background:var(--gold);"><span class="bar-val">93</span></div></div></div>
+              <div class="bar-row"><div class="bar-row-label">3%</div><div class="bar-track"><div class="bar-fill" style="width:97%;background:var(--gold);"><span class="bar-val">97</span></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONCLUSIONS -->
+        <div id="sec-conclusions" class="article-section">
+          <h2 class="section-h2">4. Conclusions &amp; Recommendations</h2>
+          <p class="body-text">This study demonstrates that combined sisal fibre and crumb rubber modification of asphalt concrete yields measurable performance improvements across all tested parameters. The 2%–3% modifier content range is identified as optimal, balancing tensile strength (28% peak gain at 2%) with stability (26.1% gain at 3%) and moisture resistance (97% bitumen retention at 3%). All modified mixes exceeded the minimum 8.0 kN Marshall Stability specification.</p>
+          <p class="body-text">Future research should: (i) conduct full-scale field trials under real traffic and climatic conditions; (ii) investigate varying fibre lengths and rubber particle sizes; and (iii) perform life-cycle cost and environmental impact assessments to strengthen the case for widespread policy adoption.</p>
+          <div class="conclusions-grid">
+            <div class="conclusion-card"><div class="conclusion-icon">✅</div><div class="conclusion-title">Stability — Confirmed</div><div class="conclusion-text">26.1% improvement at 3%; all mixes exceed 8.0 kN spec</div></div>
+            <div class="conclusion-card"><div class="conclusion-icon">✅</div><div class="conclusion-title">Tensile Strength — Confirmed</div><div class="conclusion-text">28% peak gain at 2%; optimal window identified at 2%–3%</div></div>
+            <div class="conclusion-card"><div class="conclusion-icon">✅</div><div class="conclusion-title">Adhesion — Confirmed</div><div class="conclusion-text">97% bitumen retention at 3%; excellent moisture resistance</div></div>
+            <div class="conclusion-card"><div class="conclusion-icon">🔬</div><div class="conclusion-title">Future Research</div><div class="conclusion-text">Field trials, varying fibre lengths, life-cycle cost analysis</div></div>
+          </div>
+        </div>
+
+        <!-- REFERENCES -->
+        <div id="sec-references" class="article-section">
+          <div class="refs-header">
+            <h2 class="section-h2" style="margin:0;">References</h2>
+            <div class="cite-toggle">
+              <button class="cite-btn active" onclick="setCiteStyle('apa',this)">APA</button>
+              <button class="cite-btn" onclick="setCiteStyle('ieee',this)">IEEE</button>
+            </div>
+          </div>
+          <div class="refs-list" id="refs-list"></div>
+        </div>
+
+      </div><!-- /.article-body -->
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- CV PAGE                                                                -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div id="page-cv" class="page">
+  <div class="cv-layout">
+    <!-- Profile Header -->
+    <div class="cv-header">
+      <div class="cv-avatar"><span class="cv-avatar-text">KEM</span></div>
+      <div class="cv-info">
+        <div class="cv-name">Kioko Evans Mwendwa</div>
+        <div class="cv-title">B.Eng. Civil &amp; Construction Engineering</div>
+        <div class="cv-inst">Technical University of Kenya · Department of Civil &amp; Construction Engineering · Nairobi, Kenya</div>
+        <p class="cv-bio">Civil &amp; Construction Engineering graduate specialising in sustainable road materials and pavement engineering. Research focused on applying locally-sourced and waste-derived materials as asphalt modifiers for improved pavement performance in East African climatic and traffic conditions.</p>
+        <div class="cv-links">
+          <span class="cv-link">✉ evansskioko@gmail.com</span>
+          <span class="cv-link">🔗 linkedin.com/in/MWENDWAS</span>
+        </div>
+      </div>
+      <div class="cv-stats">
+        <div class="cv-stat"><div class="cv-stat-val">1</div><div class="cv-stat-label">Publication</div></div>
+        <div class="cv-stat"><div class="cv-stat-val">17</div><div class="cv-stat-label">References cited</div></div>
+        <div class="cv-stat"><div class="cv-stat-val">5</div><div class="cv-stat-label">Test parameters</div></div>
+        <div class="cv-stat"><div class="cv-stat-val">2026</div><div class="cv-stat-label">Graduation year</div></div>
+      </div>
+    </div>
+
+    <!-- CV Grid -->
+    <div class="cv-grid">
+      <!-- Education -->
+      <div class="card cv-grid-full">
+        <div class="cv-section-label" style="color:var(--teal);">Education</div>
+        <div class="edu-row">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-degree">Bachelor of Engineering — Civil &amp; Construction Engineering</div>
+            <div class="edu-inst">Technical University of Kenya</div>
+            <div class="edu-meta"><span class="edu-year">2020–2024</span><span class="edu-gpa">First Class Honours</span></div>
+          </div>
+        </div>
+        <div class="edu-row">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-degree">Kenya Certificate of Secondary Education (KCSE)</div>
+            <div class="edu-inst">Maasai High School, Kikuyu</div>
+            <div class="edu-meta"><span class="edu-year">2017–2021</span><span class="edu-gpa">A Plain</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills x4 -->
+      <div class="card">
+        <div class="cv-section-label" style="color:var(--navy-mid);">Pavement Engineering</div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Marshall Mix Design</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Asphalt Concrete Design</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Flexible Pavement Analysis</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Bitumen Characterisation</span></div>
+      </div>
+      <div class="card">
+        <div class="cv-section-label" style="color:var(--navy-mid);">Laboratory Testing</div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Marshall Stability &amp; Flow</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Indirect Tensile Strength</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Bitumen Stripping Tests</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Aggregate Grading Analysis</span></div>
+      </div>
+      <div class="card">
+        <div class="cv-section-label" style="color:var(--navy-mid);">Software &amp; Tools</div>
+        <div class="skill-item"><div class="skill-dot"></div><span>AutoCAD</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>MATLAB</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Microsoft Project</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Primavera P6</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>SPSS</span></div>
+      </div>
+      <div class="card">
+        <div class="cv-section-label" style="color:var(--navy-mid);">Research Methods</div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Experimental Design</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Statistical Analysis</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Technical Writing</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span>Literature Review</span></div>
+      </div>
+
+      <!-- Publications -->
+      <div class="card cv-grid-full">
+        <div class="cv-section-label" style="color:var(--teal);">Publications</div>
+        <div class="pub-card">
+          <div class="pub-header">
+            <div>
+              <div class="pub-title">Performance Assessment of Asphalt Concrete Modified with a Mixture of Sisal Fibre and Crumb Rubber for Road Pavement Construction</div>
+              <div class="pub-journal">Journal of Civil &amp; Construction Engineering</div>
+              <div class="pub-doi"></div>
+            </div>
+            <span class="pub-status">Published</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research Interests -->
+      <div class="card cv-grid-full">
+        <div class="cv-section-label" style="color:var(--text-muted);">Research Interests</div>
+        <div>
+          <span class="interest-tag">Sustainable road materials</span>
+          <span class="interest-tag">Waste utilisation in construction</span>
+          <span class="interest-tag">Pavement distress analysis</span>
+          <span class="interest-tag">Life-cycle cost analysis</span>
+          <span class="interest-tag">Green infrastructure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Footer ──────────────────────────────────────────────────────────── -->
+<footer>
+  <p class="footer-text">
+    © 2024 Kioko Evans Mwendwa
+    <span class="footer-dot">·</span>
+    Technical University of Kenya
+    <span class="footer-dot">·</span>
+    Department of Civil &amp; Construction Engineering
+    <span class="footer-dot">·</span>
+  </p>
+</footer>
+
+<script>
+  // ─── References data ─────────────────────────────────────────────────────
+  const REFS_APA = [
+    "Abiola, O.S., Kupolati, W.K., Sadiku, E.R. and Ndambuki, J.M., 2014. Utilization of waste rubber in asphaltic concrete – A review. International Journal of Civil, Environmental, Structural, Construction and Architectural Engineering, 8(6), pp.700–707.",
+    "Al-Hadidy, A.I. and Yi-qiu, T., 2009. Effect of polyethylene on life of flexible pavements. Construction and Building Materials, 23(3), pp.1456–1464.",
+    "Cao, W., Wang, H., You, Z. and Mills-Beale, J., 2017. Development of a performance-related fatigue model for asphalt mixtures containing different fibres and crumb rubber. Construction and Building Materials, 135, pp.626–635.",
+    "da Silva, J.F. et al., 2017. Effect of natural fibres on the performance of asphalt mixtures. Construction and Building Materials, 137, pp.719–728.",
+    "Fahim, A.F., Hassan, N.A., Airey, G. and Napiah, M., 2020. Storage stability of crumb rubber modified asphalt binders: A review. Construction and Building Materials, 260, 119771.",
+    "Gungor, A.G. and Topcu, I.B., 2020. Effect of hybrid fibres on the mechanical properties of rubberized asphalt concrete. Construction and Building Materials, 230, 116999.",
+    "Huaxin, Z., Yanjun, Q. and Zhiyong, Y., 2009. Environmental and economic evaluation of waste tyre utilization. Journal of Environmental Sciences, 21(11), pp.1645–1650.",
+    "Kar, S., Panda, M. and Ghosh, S., 2019. Performance evaluation of bituminous paving mixes containing natural fibre. Materials Today: Proceedings, 19, pp.185–194.",
+    "Kenya National Highways Authority (KeNHA), 2019. Annual Report 2018/2019. Nairobi: KeNHA.",
+    "Little, D.N. and Bhasin, A., 2006. Exploring mechanisms of moisture damage in asphalt mixtures. NCHRP Report 539. Washington, DC: Transportation Research Board.",
+    "Lo Presti, D., 2013. Recycled tyre rubber modified bitumens for road asphalt mixtures: A literature review. Construction and Building Materials, 49, pp.863–881.",
+    "Mashaan, N.S., Ali, A.H., Karim, M.R. and Abdelaziz, M., 2014. Performance evaluation of crumb rubber modified stone mastic asphalt pavement in Malaysia. Advances in Materials Science and Engineering, 2014, pp.1–8.",
+    "Oyedepo, O., Oluwajana, S.D. and Akande, S.P., 2021. Investigation of properties of bituminous concrete using sisal fibre as an additive. Civil and Environmental Research, 13(1), pp.44–54.",
+    "Ramakrishna, G. and Sundararajan, T., 2005. Studies on the durability of natural fibres and the effect of corroded fibres on the strength of mortar. Cement and Concrete Composites, 27(5), pp.575–582.",
+    "Raju, S.S., Ramesh, K. and Lakshmipathy, M., 2015. Investigation of performance of sisal fibre in bituminous concrete. International Journal of Civil Engineering and Technology, 6(8), pp.29–38.",
+    "Xiao, F., Amirkhanian, S. and Hsiang-Wei, G., 2012. Permanent deformation characteristics of rubberized asphalt mixtures. Road Materials and Pavement Design, 13(2), pp.210–226.",
+    "Zakari, M., Aliyu, M.M. and Ibrahim, M., 2023. Effect of crumb rubber modified bitumen in hot mix asphalt concrete. Nigerian Journal of Technology, 42(1), pp.1–9.",
+  ];
+  const REFS_IEEE = [
+    '[1] O.S. Abiola et al., "Utilization of waste rubber in asphaltic concrete – A review," Int. J. Civil Environ. Struct. Construct. Archit. Eng., vol. 8, no. 6, pp. 700–707, 2014.',
+    '[2] A.I. Al-Hadidy and T. Yi-qiu, "Effect of polyethylene on life of flexible pavements," Constr. Build. Mater., vol. 23, no. 3, pp. 1456–1464, 2009.',
+    '[3] W. Cao et al., "Development of a performance-related fatigue model for asphalt mixtures containing different fibres and crumb rubber," Constr. Build. Mater., vol. 135, pp. 626–635, 2017.',
+    '[4] J.F. da Silva et al., "Effect of natural fibres on the performance of asphalt mixtures," Constr. Build. Mater., vol. 137, pp. 719–728, 2017.',
+    '[5] A.F. Fahim et al., "Storage stability of crumb rubber modified asphalt binders: A review," Constr. Build. Mater., vol. 260, p. 119771, 2020.',
+    '[6] A.G. Gungor and I.B. Topcu, "Effect of hybrid fibres on the mechanical properties of rubberized asphalt concrete," Constr. Build. Mater., vol. 230, p. 116999, 2020.',
+    '[7] Z. Huaxin, Q. Yanjun, and Y. Zhiyong, "Environmental and economic evaluation of waste tyre utilization," J. Environ. Sci., vol. 21, no. 11, pp. 1645–1650, 2009.',
+    '[8] S. Kar, M. Panda, and S. Ghosh, "Performance evaluation of bituminous paving mixes containing natural fibre," Mater. Today Proc., vol. 19, pp. 185–194, 2019.',
+    '[9] Kenya National Highways Authority (KeNHA), Annual Report 2018/2019. Nairobi: KeNHA, 2019.',
+    '[10] D.N. Little and A. Bhasin, "Exploring mechanisms of moisture damage in asphalt mixtures," NCHRP Rep. 539, TRB, Washington, DC, 2006.',
+    '[11] D. Lo Presti, "Recycled tyre rubber modified bitumens for road asphalt mixtures: A literature review," Constr. Build. Mater., vol. 49, pp. 863–881, 2013.',
+    '[12] N.S. Mashaan et al., "Performance evaluation of crumb rubber modified stone mastic asphalt pavement in Malaysia," Adv. Mater. Sci. Eng., vol. 2014, pp. 1–8, 2014.',
+    '[13] O. Oyedepo, S.D. Oluwajana, and S.P. Akande, "Investigation of properties of bituminous concrete using sisal fibre as an additive," Civil Environ. Res., vol. 13, no. 1, pp. 44–54, 2021.',
+    '[14] G. Ramakrishna and T. Sundararajan, "Studies on the durability of natural fibres and the effect of corroded fibres on the strength of mortar," Cem. Concr. Compos., vol. 27, no. 5, pp. 575–582, 2005.',
+    '[15] S.S. Raju, K. Ramesh, and M. Lakshmipathy, "Investigation of performance of sisal fibre in bituminous concrete," Int. J. Civil Eng. Technol., vol. 6, no. 8, pp. 29–38, 2015.',
+    '[16] F. Xiao, S. Amirkhanian, and G. Hsiang-Wei, "Permanent deformation characteristics of rubberized asphalt mixtures," Road Mater. Pavement Des., vol. 13, no. 2, pp. 210–226, 2012.',
+    '[17] M. Zakari, M.M. Aliyu, and M. Ibrahim, "Effect of crumb rubber modified bitumen in hot mix asphalt concrete," Nigerian J. Technol., vol. 42, no. 1, pp. 1–9, 2023.',
+  ];
+
+  let currentCiteStyle = 'apa';
+
+  function renderRefs(style) {
+    const list = style === 'apa' ? REFS_APA : REFS_IEEE;
+    const container = document.getElementById('refs-list');
+    container.innerHTML = list.map((r, i) => `
+      <div class="ref-row">
+        ${style === 'apa' ? `<span class="ref-num">[${i+1}]</span>` : ''}
+        <p class="ref-text">${r}</p>
+      </div>
+    `).join('');
+  }
+
+  function setCiteStyle(style, btn) {
+    currentCiteStyle = style;
+    document.querySelectorAll('.cite-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRefs(style);
+  }
+
+  // ─── Page navigation ──────────────────────────────────────────────────────
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach((b, i) => {
+      const ids = ['home','article','cv'];
+      b.classList.toggle('active', ids[i] === id);
+    });
+    window.scrollTo(0, 0);
+    if (id === 'article') renderRefs(currentCiteStyle);
+  }
+
+  // ─── Article section navigation ───────────────────────────────────────────
+  function showSection(id) {
+    document.querySelectorAll('.article-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    document.querySelectorAll('.sidebar-nav-btn').forEach(b => b.classList.remove('active'));
+    const sectionIds = ['abstract','introduction','methodology','results','conclusions','references'];
+    const idx = sectionIds.indexOf(id);
+    document.querySelectorAll('.sidebar-nav-btn')[idx].classList.add('active');
+    if (id === 'references') renderRefs(currentCiteStyle);
+  }
+
+  // Init refs
+  renderRefs('apa');
+</script>
+</body>
+</html>
